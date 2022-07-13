@@ -1,59 +1,50 @@
-const sequelize = require('../config/connection');
-const { User, Post } = require('../models');
+const { User } = require("../models");
 
-const userdata = [
+const userData = [
   {
-    username: 'alesmonde0',
-    email: 'nwestnedge0@cbc.ca',
-    password: 'password123'
+    username: "Cameron",
+    twitter: "CameronisCool",
+    github: "CameronStroup",
+    email: "Cameron@gmail.com",
+    password: "cam@ssword1",
   },
   {
-    username: 'jwilloughway1',
-    email: 'rmebes1@sogou.com',
-    password: 'password123'
+    username: "Hunter",
+    twitter: "HunterisCool",
+    github: "HunterStroup",
+    email: "Hunter@gmail.com",
+    password: "Hunter@ssword1",
   },
   {
-    username: 'iboddam2',
-    email: 'cstoneman2@last.fm',
-    password: 'password123'
+    username: "Lake",
+    twitter: "Lakeisagoodboy",
+    github: "LakeStroup",
+    email: "Lake@gmail.com",
+    password: "Lake@ssword1",
   },
   {
-    username: 'dstanmer3',
-    email: 'ihellier3@goo.ne.jp',
-    password: 'password123'
+    username: "trent",
+    twitter: "trent",
+    github: "trent",
+    email: "trent@gmail.com",
+    password: "trent@ssword1",
   },
   {
-    username: 'djiri4',
-    email: 'gmidgley4@weather.com',
-    password: 'password123'
+    username: "Susan",
+    twitter: "Susana",
+    github: "SusanStropu",
+    email: "susan@gmail.com",
+    password: "sus@ssword1",
   },
   {
-    username: 'msprague5',
-    email: 'larnout5@imdb.com',
-    password: 'password123'
+    username: "mom",
+    twitter: "moma",
+    github: "Momstroup",
+    email: "mom@gmail.com",
+    password: "mmmmm@ssword1",
   },
-  {
-    username: 'mpergens6',
-    email: 'hnapleton6@feedburner.com',
-    password: 'password123'
-  },
-  {
-    username: 'tpenniell7',
-    email: 'kperigo7@china.com.cn',
-    password: 'password123'
-  },
-  {
-    username: 'msabbins8',
-    email: 'lmongain8@google.ru',
-    password: 'password123'
-  },
-  {
-    username: 'jmacarthur9',
-    email: 'bsteen9@epa.gov',
-    password: 'password123'
-  }
 ];
 
-const seedUsers = () => User.bulkCreate(userdata, {individualHooks: true});
+const seedUsers = () => User.bulkCreate(userData);
 
 module.exports = seedUsers;
