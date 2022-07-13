@@ -2,6 +2,19 @@ const router = require("express").Router();
 const { User, Post, Comment } = require("../../models");
 const withAuth = require("../../utils/auth");
 
+// GET /api/users
+router.get("/", (req, res) => {
+  // Access our User model and run .findAll() method
+  User.findAll({
+    attributes: { exclude: ["password"] },
+  })
+    .then((dbUserData) => res.json(dbUserData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 // GET /api/users/1
 router.get("/:id", (req, res) => {
   User.findOne({
@@ -37,19 +50,6 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// GET /api/users
-router.get("/", (req, res) => {
-  // Access our User model and run .findAll() method
-  User.findAll({
-    attributes: { exclude: ["password"] },
-  })
-    .then((dbUserData) => res.json(dbUserData))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
 // POST /api/users
 router.post("/", (req, res) => {
   User.create({
@@ -71,6 +71,7 @@ router.post("/", (req, res) => {
   });
 });
 
+// LOGIN
 router.post("/login", (req, res) => {
   User.findOne({
     where: {
@@ -111,6 +112,8 @@ router.post("/logout", (req, res) => {
     res.status(404).end();
   }
 });
+
+// PUT /api/users/1
 router.put("/:id", withAuth, (req, res) => {
   User.update(req.body, {
     individualHooks: true,
@@ -131,8 +134,6 @@ router.put("/:id", withAuth, (req, res) => {
     });
 });
 
-module.exports = router;
-
 // DELETE /api/users/1
 router.delete("/:id", withAuth, (req, res) => {
   User.destroy({
@@ -152,3 +153,5 @@ router.delete("/:id", withAuth, (req, res) => {
       res.status(500).json(err);
     });
 });
+
+module.exports = router;
