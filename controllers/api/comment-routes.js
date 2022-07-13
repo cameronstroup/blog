@@ -1,10 +1,20 @@
 const router = require("express").Router();
-const { Comment } = require("../models");
-const withAuth = require("../utils/auth");
+const Comment = require("../../models");
+const withAuth = require("../../utils/auth");
 
-router.get("/", (req, res) => {
-  Comment.findAll({})
-    .then((dbCommentData) => res.json(dbCommentData))
+router.delete("/:id", withAuth, (req, res) => {
+  Comment.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((dbcomdata) => {
+      if (!dbcomdata) {
+        res.status(404).json({ message: "id is not found" });
+        return;
+      }
+      res.json(dbcomdata);
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -20,7 +30,7 @@ router.post("/", withAuth, (req, res) => {
       // use the id from the session
       user_id: req.session.user_id,
     })
-      .then((dbCommentData) => res.json(dbCommentData))
+      .then((dbcomdata) => res.json(dbcomdata))
       .catch((err) => {
         console.log(err);
         res.status(400).json(err);
@@ -28,19 +38,9 @@ router.post("/", withAuth, (req, res) => {
   }
 });
 
-router.delete("/:id", withAuth, (req, res) => {
-  Comment.destroy({
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((dbCommentData) => {
-      if (!dbCommentData) {
-        res.status(404).json({ message: "No comment found with this id" });
-        return;
-      }
-      res.json(dbCommentData);
-    })
+router.get("/", (req, res) => {
+  Comment.findAll({})
+    .then((dbcomdata) => res.json(dbcomdata))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
