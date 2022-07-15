@@ -130,7 +130,7 @@ router.post("/logout", (req, res) => {
   }
 });
 
-// PUT /api/users/1
+
 router.put("/:id", withAuth, (req, res) => {
   User.update(req.body, {
     individualHooks: true,

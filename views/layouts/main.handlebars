@@ -1,27 +1,41 @@
-<html lang="en">
+<html>
 
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cameron's Blog</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <meta charset="utf-8" />
+    <title>Tech Blog</title>
+    <link rel="stylesheet" href="/public/stylesheets/main.css" />
+
   </head>
 
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>
-          <a href="/">Cameron's Blog</a>
-        </h1>
-      </header>
-      <main>
-        {{{body}}}
-      </main>
-      <footer>
-        Thanks for visiting!
-      </footer>
-    </div>
+    {{! Nav bar that goes on every page }}
+    <nav id="navbar">
+      <ul id="navbar-ul">
+        <li>
+          <p><a class="link" href="/">Home</a></p>
+        </li>
+        {{!-- {{#if loggedIn}} --}}
+        <li>
+          <p><a class="link" href="/dashboard">Dashboard</a></p>
+        </li>
+        <li>
+          <p><button id="logout-btn" class="btn-no-style">Logout</button> </p>
+        </li>
+
+        {{!-- {{else}} --}}
+        <li>
+          <p><a class="link" href="/login">Login</a></p>
+        </li>
+        {{!-- {{/if}} --}}
+      </ul>
+      <h1 id="nav-header">The Tech Blog</h1>
+    </nav>
+    {{{body}}}
 
   </body>
+  {{!
+<script src="/js/nav.js"></script> }}
+  <script src="/js/logout.js"></script>
+  <script src="/js/home.js"></script>
 
 </html>
