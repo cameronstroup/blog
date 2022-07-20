@@ -17,3 +17,4 @@ This project uses the Model-View-Controller (MVC) paradigm to create a blog-styl
 
 ## Usage
 The application is deployed on Heroku at https://vast-island-77148.herokuapp.com/dashboard
+![image](https://user-images.githubusercontent.com/90347622/179886882-ab7abbe0-c1b4-4df7-8c83-7579214ba5d9.png)
