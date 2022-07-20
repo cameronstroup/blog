@@ -18,16 +18,12 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   User.create({
     username: req.body.username,
-    email: req.body.email,
+
     password: req.body.password,
-    twitter: req.body.twitter,
-    github: req.body.github,
   }).then((dbDataUser) => {
     req.session.save(() => {
       req.session.user_id = dbDataUser.id;
       req.session.username = dbDataUser.username;
-      req.session.twitter = dbDataUser.twitter;
-      req.session.github = dbDataUser.github;
       req.session.loggedIn = true;
 
       res.json(dbDataUser);
@@ -73,7 +69,7 @@ router.get("/:id", (req, res) => {
 router.post("/login", (req, res) => {
   User.findOne({
     where: {
-      email: req.body.email,
+      username: req.body.username,
     },
   }).then((dbDataUser) => {
     if (!dbDataUser) {
@@ -92,8 +88,7 @@ router.post("/login", (req, res) => {
       // declare session variables
       req.session.user_id = dbDataUser.id;
       req.session.username = dbDataUser.username;
-      req.session.twitter = dbDataUser.twitter;
-      req.session.github = dbDataUser.github;
+
       req.session.loggedIn = true;
 
       res.json({ user: dbDataUser, message: "You are now logged in!" });
@@ -129,7 +124,6 @@ router.post("/logout", (req, res) => {
     res.status(404).end();
   }
 });
-
 
 router.put("/:id", withAuth, (req, res) => {
   User.update(req.body, {
